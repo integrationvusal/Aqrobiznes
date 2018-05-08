@@ -241,7 +241,7 @@ class SiteController extends Controller
             $recaptcha = json_decode(file_get_contents('https://www.google.com/recaptcha/api/siteverify?secret=6LeCOEEUAAAAAE2J6TldskMYyLtaNRMI-SgTtEu6&response='.$_p['g-recaptcha-response'].'&remoteip='.$_SERVER['REMOTE_ADDR']));
 
             if($recaptcha->success == 1){
-                $_html = '<table cellspacing="0" cellpadding="0" border="1" width="100%">';
+                $_html = '<table cellspacing="0" cellpadding="5" border="1" width="100%">';
 
     			foreach ($_p['contact'] as $k=>$_c) {
     				$_html.='
@@ -257,22 +257,23 @@ class SiteController extends Controller
 
                 $mail = new PHPMailer;
 				$mail->isSMTP();
-				$mail->Host = 'smtp.mail.gov.az';
-				$mail->Port = 587;
-				$mail->SMTPSecure = 'tls';    
+				$mail->Host = 'mail.aqrobiznes.az';
+				$mail->Port = 465;
+				$mail->SMTPSecure = 'ssl';    
 				$mail->SMTPAuth = true;
+				//$mail->SMTPDebug  = 2;
 				$mail->CharSet = 'UTF-8';
 				$mail->IsHTML(true);
-				$mail->Username = 'mail@tedaruk.gov.az';
-				$mail->Password = 'Baku@2017';
-				$mail->setFrom('mail@tedaruk.gov.az','Aqrobiznes');
+				$mail->Username = 'contact@aqrobiznes.az';
+				$mail->Password = 'q;4+{QFZO#q2';
+				$mail->setFrom('contact@aqrobiznes.az','Aqrobiznes');
 
 				$mail->addAddress($this->_settings['email'], 'Mail Aqrobiznes');
 				$mail->Subject = 'Aqrobiznes - Əlaqə';
 
 				$mail->msgHTML($_html);
 				
-				if (!$mail->send()) 
+				if ($mail->send()) 
 					flash('Məlumatlar uğurla göndərildi!')->success();
 				 else 
 					flash('Məlumatları göndərmək mümkün olmadı!')->error(); 
