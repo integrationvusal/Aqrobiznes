@@ -1,0 +1,2 @@
+[30-Apr-2018 12:26:02 Asia/Baku] PHP Notice:  Undefined variable: all_tags in /home/aqrobiznes/public_html/__admin/app/views/actions/news_list.php on line 46
+[30-Apr-2018 12:26:02 Asia/Baku] PHP Notice:  Undefined variable: selection_tags in /home/aqrobiznes/public_html/__admin/app/views/actions/news_list.php on line 47
