@@ -8,18 +8,21 @@
     <meta property="og:title" content="{{$settings['site_name']}} - @yield('title')">
     <meta property="og:description" content="{{$settings['site_desc']}}">
     <meta property="og:image" content="{{$page_img}}">
+    <meta property="og:image:width" content="300">
+    <meta property="og:image:height" content="200">
     <meta property="og:type" content="article" />
+    <meta property="fb:app_id" content="396370347439543" />
     <meta property="og:url" content="{{$page_url}}">
+    <meta property="og:site_name" content="{{$settings['site_name']}}">
+
     <meta name="twitter:card" content="summary_large_image">
     <meta name="theme-color" content="#ff3300" />
-
-    <meta property="og:site_name" content="{{$settings['site_name']}}">
     <meta name="twitter:image:alt" content="{{$settings['site_name']}} - @yield('title')">
 
     <title>{{$settings['site_name']}} - @yield('title')</title>
-    
+
     <link rel="shortcut icon" href="{{asset('img/favicon.ico')}}">
-    
+
     <link href="{{asset('css/bootstrap.css')}}" rel="stylesheet" />
     <link href="{{asset('css/font-awesome.min.css')}}" rel="stylesheet" />
     <link href="{{asset('css/owl.carousel.css')}}" rel="stylesheet" />
@@ -39,11 +42,11 @@
 	  var js, fjs = d.getElementsByTagName(s)[0];
 	  if (d.getElementById(id)) return;
 	  js = d.createElement(s); js.id = id;
-	  js.src = 'https://connect.facebook.net/ru_RU/sdk.js#xfbml=1&version=v2.12';
+	  js.src = 'https://connect.facebook.net/ru_RU/sdk.js#xfbml=1&version=v3.0&appId=396370347439543&autoLogAppEvents=1';
 	  fjs.parentNode.insertBefore(js, fjs);
 	}(document, 'script', 'facebook-jssdk'));</script>
-    
-    <header>		
+
+    <header>
 		<div id="sliderFrame">
 			<div id="slider">
 			    @foreach($slider as $s)
@@ -61,8 +64,8 @@
 						<span class="icon-bar"></span>
 						<span class="icon-bar"></span>
 						<span class="icon-bar"></span>
-					</button>				
-					
+					</button>
+
 				</div>
 
 				<!-- Collect the nav links, forms, and other content for toggling -->
@@ -81,7 +84,7 @@
         <div class="container">
             <div class="row slideanim">
                 <div class="col-xs-12">
-                    
+
                     @widget('MenuWidget', ['class'=>'list-inline', 'submenu'=>false, 'brand'=>false])
 
                     <p>{!! $settings['footer_text'] !!}</p>
@@ -124,7 +127,7 @@
 			    }
 			  });
 			});
-		});		
+		});
 	</script>
 	<script>
 		$('#alqi-satqi .owl-carousel').owlCarousel({
