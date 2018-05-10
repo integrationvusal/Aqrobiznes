@@ -28,7 +28,7 @@
                                 </div>
                                 <a href="{{ $settings['facebook'] }}" class="fa sosial-bg fa-facebook"></a>
                       					<a href="{{ $settings['youtube'] }}" class="fa sosial-bg fa-youtube"></a>
-                      					<a href="https://api.whatsapp.com/send?phone={{ $settings['whatsapp'] }}&text={{$title}} - {{strip_tags($content)}}" class="fa sosial-bg fa-whatsapp"></a>
+                      					<a href="https://api.whatsapp.com/send?phone={{ $settings['whatsapp'] }}&text={{url()->full()}}" class="fa sosial-bg fa-whatsapp"></a>
 
                             </div>
                             <div class="col-md-4">

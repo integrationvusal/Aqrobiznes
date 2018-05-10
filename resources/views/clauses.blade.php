@@ -22,13 +22,13 @@
                                 {!!$content!!}
 
                                 <hr class="clear"/>
-                                
+
                                 <div class="fb-share-button" data-href="{{url()->full()}}" data-layout="box_count" data-size="small" data-mobile-iframe="true">
                                   <a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u={{ urlencode(url()->full())}}%2F&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore"></a>
                                 </div>
                                 <a href="{{ $settings['facebook'] }}" class="fa sosial-bg fa-facebook"></a>
                                 <a href="{{ $settings['youtube'] }}" class="fa sosial-bg fa-youtube"></a>
-                                <a href="https://api.whatsapp.com/send?phone={{ $settings['whatsapp'] }}&text={{$title}} - {{strip_tags($content)}}" class="fa sosial-bg fa-whatsapp"></a>
+                                <a href="https://api.whatsapp.com/send?phone={{ $settings['whatsapp'] }}&text={{url()->full()}}" class="fa sosial-bg fa-whatsapp"></a>
 
                             </div>
                             <div class="col-md-4">
