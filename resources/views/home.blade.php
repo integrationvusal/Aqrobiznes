@@ -86,11 +86,11 @@
 			<div class="row slideanim">
 				<div class="col-md-4 col-sm-6 col-xs-12">
 					<div class="main-title">
-						<span>SAĞLAM YAŞA</span>
+						<a href="{{route('category', 'saghlam-yasha')}}"><span>SAĞLAM YAŞA</span></a>
 					</div>
 					<div class="clear"></div>
 						<div class="info-content">
-						<a href="{{route('category', 'saghlam-yasha')}}" class="hvr-sweep-to-top" style="width:100%;">
+						<a href="{{route('news_read', $healthy['sef'])}}" class="hvr-sweep-to-top" style="width:100%;">
 							<div class="info-hover">
 								<h3>{{$healthy['title']}}</h3>
 							</div>
@@ -106,7 +106,7 @@
     				<div class="col-md-4 col-sm-6 col-xs-12">
     					<div class="main-title">
     					    
-    					<span>BİZNES LAYİHƏLƏRİ</span>
+    					<a href="{{route('interview_list')}}"><span>BİZNES LAYİHƏLƏRİ</span></a>
     					</div>
     					<div class="clear"></div>
     					<div class="info-content">
@@ -126,7 +126,7 @@
 				@endif
 				<div class="col-md-4 col-sm-6 col-xs-12">
 					<div class="main-title">
-					<span>KÖŞƏ YAZILARI</span>
+					<a href="{{route('clauses_list')}}"><span>KÖŞƏ YAZILARI</span></a>
 					</div>
 					<div class="clear"></div>
 					<div class="info-content">

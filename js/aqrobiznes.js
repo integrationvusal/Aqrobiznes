@@ -28,7 +28,8 @@ $(document).ready(function() {
 		_this = $(this);
 
         let _has_class = _this.hasClass('lent');
-		let _data = {start:++$_loadmore, _token:$('[name="csrf-token"]').attr('content')};
+        let _route = $(this).data('route');
+		let _data = {start:++$_loadmore, _token:$('[name="csrf-token"]').attr('content'), type:_route?_route:'news'};
 		let _slug = $('[name="slug"]').val();
 		if(_slug) _data['slug'] = _slug;
 		

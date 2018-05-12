@@ -18,7 +18,7 @@
                         <div class="row load-to">
 							@foreach($news as $new)
 								<div class="col-xs-12 col-sm-6 col-md-4">
-									<a href="{{route('news_read', $new['sef'])}}">
+									<a href="{{route(isset($type)?$type:'news_read', $new['sef'])}}">
 										<article>
 											<div class="image-size">
 												<img src="{{asset('upload/news/originals/'.$new['img'])}}" class="img-responsive img-rounded" alt="">
@@ -41,7 +41,7 @@
                         </div>
                         <div class="row">
 							<div class="col-xs-12">
-								<button class="load-more">Daha çox</button>
+								<button class="load-more" @if(isset($type))data-route="{{$type}}"@endif>Daha çox</button>
 							</div>
 						</div>
                     </div>

@@ -5,13 +5,13 @@
 @section('content')
     <script src='https://www.google.com/recaptcha/api.js?hl=az'></script>
     <section class="single padding50">
-        <div class="container">
-            <div class="contact">
+        <div class="container">         
+            <div class="contact">   
                 <div class="main-title mb20">
                     <span>{{$title}}</span>
                 </div>
-                <div class="clear"></div>
-                <div class="row">
+                <div class="clear"></div>           
+                <div class="row">   
                     @include('flash::message')
                     <div class="col-sm-12 col-md-6">
                         {!! $content !!}
@@ -22,17 +22,17 @@
                     </div>
                     </div>
                     <div class="col-sm-12 col-md-6">
-                        <form action="" class="auto-contact" method="post">
-                            {{csrf_field()}}
+                        <form action="" class="auto-contact" method="post">     
+                            {{csrf_field()}}         
                             <div class="col-xs-12">
                                 <input type="text" name="contact[name]" class="form-control" id="" required="required" placeholder="Adnız">
-                            </div>
+                            </div>  
                             <div class="col-xs-12">
                                 <input type="email" name="contact[email]" class="form-control" id="" required="required" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,18}$" placeholder="E-mail">
-                            </div>
+                            </div>  
                             <div class="col-xs-12">
                                 <input type="text" name="contact[phone]" class="form-control" id="" required="required"  placeholder="Telefon">
-                            </div>
+                            </div>  
                             <div class="col-xs-12">
                                 <input type="text" name="contact[company]" class="form-control" id="" required="required"  placeholder="Təmsil etdiyiniz şirkət">
                             </div>
@@ -48,11 +48,11 @@
                             </div>
                             <div class="col-xs-12">
                                 <div class="text-center mt30"><button type="submit" class="btn btn-lg">GÖNDƏR</button></div>
-                            </div>
-                        </form>
+                            </div>                                          
+                        </form>  
                     </div>
-                </div>
-            </div>
+                </div>                  
+            </div>              
         </div>
     </section>
 

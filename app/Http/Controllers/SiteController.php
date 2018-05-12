@@ -62,7 +62,7 @@ class SiteController extends Controller
 			'content'=>$data[1]['text'],
 			'img'=>$data[0]['img'],
 			//'news'=>News::all('news', null, null, 'd.m.Y, H:i'),
-			'clauses' => News::all('clauses', null, null, 'd.m.Y, H:i'),
+			'clauses' => News::all('clauses', 6, null, 'd.m.Y, H:i'),
 			//'interviews' => News::all('interview', null, null, 'd.m.Y, H:i'),
 			//'lastInterview'=>News::get('interview', 'd.m.Y, H:i')
 		]);
@@ -82,7 +82,7 @@ class SiteController extends Controller
 			'img'=>$data[0]['img'],
 			//'news'=>News::all('news', null, null, 'd.m.Y, H:i'),
 			//'clauses' => News::all('clauses', null, null, 'd.m.Y, H:i'),
-			'interviews' => News::all('interview', null, null, 'd.m.Y, H:i'),
+			'interviews' => News::all('interview', 6, null, 'd.m.Y, H:i'),
 			//'lastClauses'=>News::get('clauses', 'd.m.Y, H:i')
 		]);
 	}
@@ -129,10 +129,10 @@ class SiteController extends Controller
 
 
 	public function news(){
-
+        $category_id = Menu::getByType('news')['id'];
 		return view('news', [
 			'title'=>'XƏBƏRLƏR',
-			'news'=>News::all('news', 6, null, 'd.m.Y, H:i'),
+			'news'=>News::all('news', 6, null, 'd.m.Y, H:i', $category_id),
 			/*'clauses' => News::all('clauses', null, null, 'd.m.Y, H:i'),
 			'interviews' => News::all('interview', null, null, 'd.m.Y, H:i'),
 			'lastClauses'=>News::get('clauses', 'd.m.Y, H:i'),
@@ -145,23 +145,30 @@ class SiteController extends Controller
 		if($request->ajax()){
             $_id = $request->input('slug');
             $_lent = $request->input('lent');
+            $_type = $request->input('type');
             $_start = (int)$request->input('start');
             if($_lent){
-                $menu = Menu::getByID($_lent);
-                return view('loadmore_lent', ['menu'=>$menu['type'] == 'category'?$menu['text']:null,'news'=> News::all('news,clauses,interview', 6, $_start, 'd.m.Y, H:i', $_lent)]);
+                if(ctype_digit($_lent)){
+                    $menu = Menu::getByID($_lent);
+                    return view('loadmore_lent', ['menu'=>$menu['type'] == 'category'?$menu['text']:null,'news'=> News::all('news,clauses,interview', 6, $_start, 'd.m.Y, H:i', $_lent)]);
+                }else
+                    return view('loadmore_lent', ['menu'=>$_lent,'news'=> News::all($_lent, 6, $_start, 'd.m.Y, H:i')]);
             }elseif($_id){
                 $_id = Article::getContent($_id)[0]['id'];
-                return view('loadmore', ['news'=> News::all('news', 6, $_start, 'd.m.Y, H:i', $_id)]);
+                return view('loadmore', ['news'=> News::all($_type, 6, $_start, 'd.m.Y, H:i', $_id)]);
             }
-            return view('loadmore', ['news'=> News::all('news', 6, $_start, 'd.m.Y, H:i')]);
+            return view('loadmore', ['news'=> News::all($_type, 6, $_start, 'd.m.Y, H:i')]);
 		}
 	}
 
 	public function photodays(){
-
-		return view('photodays', [
-			'title'=>'GÜNÜN FOTOLARI',
-			'dayphoto'=>News::all('dayphoto')
+	    
+		return view('category', [
+			'title'=>trans('custom.dayphoto'), //'GÜNÜN FOTOLARI'
+			'slug'=>'',
+			'type'=>'dayphoto',
+			'menu'=>trans('custom.dayphoto'),
+			'news'=>News::all('dayphoto', 6)
 		]);
 	}
 	
@@ -182,14 +189,15 @@ class SiteController extends Controller
 		if(!$data)	abort(404);
 
 
-		return view('category', [
+		return view('single', [
 			'title'=>$data[0]['text'],
 			'time'=>date('d.m.Y, H:i', strtotime($data[0]['add_datetime']) ),
 			'content'=>$data[1]['text'],
 			'counter'=>$data[0]['counter'],
 			'slug'=>$slug,
-			'menu'=>$data[0]['text'],
-			'news' => News::all('dayphoto', null, null, 'd.m.Y, H:i'),
+			'img'=>$data[0]['img'],
+			'menu'=>trans('custom.dayphoto'),
+			'news' => News::all('dayphoto', 6, null, 'd.m.Y, H:i'),
 		]);
 	}
 

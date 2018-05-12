@@ -53,4 +53,15 @@ class Menu
 			':id' => $id
 		]));
     }
+    
+    public static function getByType($type){
+
+    	return current(DB::select("SELECT n.*, tr.text FROM ".self::$table." n
+			LEFT JOIN translates tr ON tr.ref_table=:menu AND tr.ref_id=n.id AND tr.lang=:default_site_lang AND tr.fieldname='name'
+			WHERE is_deleted='0' AND n.type = :type LIMIT 1", [
+			':default_site_lang' => 'az',
+			':menu' => self::$table,
+			':type' => $type
+		]));
+    }
 }

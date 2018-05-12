@@ -8,5 +8,7 @@ return [
     	'news'=>'XƏBƏRLƏR',
     	'interview_list'=>'BİZNES LAYİHƏLƏRİ',
     	'clauses_list'=>'KÖŞƏ YAZILARI'
-    ]
+    ],
+    
+    'dayphoto'=>'GÜNÜN FOTOSU',
 ];

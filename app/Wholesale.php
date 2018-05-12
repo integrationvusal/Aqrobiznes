@@ -46,7 +46,10 @@ class Wholesale
         $d = DB::select("SELECT a.*, p.name product, m.name measure FROM ".self::$table." a 
     		    LEFT JOIN product p ON p.id = a.product_id
     		    LEFT JOIN measure m ON m.id = a.measure_id 
-		        ORDER BY a.date DESC LIMIT 1")[0];
+		        ORDER BY a.date DESC LIMIT 1");
+		 if(!isset($d[0])) return [];
+		 
+		$d = $d[0];
 
 		$d['prices'] = json_decode($d['prices'], true);
 		 

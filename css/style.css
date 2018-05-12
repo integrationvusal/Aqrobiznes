@@ -1004,6 +1004,13 @@ footer p {
   .owl-theme .owl-nav {
     display: none;
   }
+  footer .list-inline li{
+    width:45%;
+  }
+  
+  footer .list-inline li a:after{
+    display:none;
+  }
 }
 @media screen and (max-width: 761px){
     .info-content{

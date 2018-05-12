@@ -107,7 +107,6 @@ class mysql_pdo {
 		}
 
 		$sql = "INSERT INTO {$path} (`".implode("`, `", array_keys($data))."`) VALUES (".implode(", ", $vals).")";
-
 		$affected = $this->exec($sql);
 		if ($return_id && $affected) {
 			$inserted = $this->pdo->lastInsertId();

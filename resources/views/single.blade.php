@@ -32,7 +32,7 @@
                 </div>
                 <div class="col-md-4">
                     
-                    <div class="other-news @if($menu) category @endif">@if($menu) {{$menu}} XƏBƏRLƏRİ @else XƏBƏRLƏR @endif</div>
+                    <div class="other-news @if($menu) category @endif">@if($menu) {{$menu}}  @else XƏBƏRLƏR @endif</div>
                 
                     <div class="clear"></div>   
                     @foreach($news as $new)
@@ -50,7 +50,7 @@
                     
                     <div class="row load-to">
 						<div class="col-xs-12">
-							<button class="load-more lent" accesskey="{{$lent}}">Daha çox</button>
+							<button class="load-more lent" accesskey="dayphoto" data-route="dayphoto">Daha çox</button>
 						</div>
 					</div>
 
