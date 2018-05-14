@@ -613,6 +613,9 @@ article:hover .news-content-block {
 .single {
   background: #eee;
 }
+.single .table{
+	background:#fff;
+}
 .single p {
   font-size: 120%;
   margin-bottom: 30px;
