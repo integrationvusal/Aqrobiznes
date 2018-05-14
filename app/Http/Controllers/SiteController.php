@@ -23,7 +23,7 @@ class SiteController extends Controller
 
 		return view('home',[
 			'title'=>'Ana səhifə',
-			'wholesales'=>Wholesale::last(),
+			'wholesales'=>Wholesale::all(),
 			'agrocalendar'=>Agrocalendar::all(),
 			'questions'=>Questions::all(),
 			'photoday'=>Photoday::get(['img', 'title']),
