@@ -53,6 +53,6 @@ $(function(){
     });
     
     $('body').on('change', '.form-control.markets', function(){
-        $(this).parents('tr.wholesale').find('.whole-price').text($(':selected', this).attr('accesskey'));
+        $(this).parents('tr.wholesale').find('.whole-price').text(parseFloat($(':selected', this).attr('accesskey')).toFixed(2));
     });
 });
