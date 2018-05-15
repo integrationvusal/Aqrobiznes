@@ -191,13 +191,13 @@ class mysql_pdo {
 		return true;
 	}
 
-	private function genSelectQuery($col, $tbl='', $flt='', $ord='', $fr='', $num='', $tr=false) 
+	private function genSelectQuery($col, $tbl='', $flt='', $ord='', $fr='', $num='', $tr=false)
 	{
 		if (!empty($flt) && is_array($flt)) $flt = implode(' AND ', $flt);
-		
+
 		if($tr)
-			return "SELECT {$col}".(empty($tbl)? '': " FROM {$tbl} a LEFT JOIN {$tr['table']} b ON a.{$tr['foreign']} = b.id").(empty($flt)? '': " WHERE {$flt}").(empty($ord)? '': " ORDER BY {$ord}").($num? '': (" LIMIT ".(($fr>0)? "{$fr}, ": '')."{$num}"));
-			
+			return "SELECT {$col}".(empty($tbl)? '': " FROM {$tbl} a LEFT JOIN {$tr['table']} b ON a.{$tr['foreign']} = b.id").(empty($flt)? '': " WHERE {$flt}").(empty($ord)? '': " ORDER BY {$ord}").(empty($num)?'':(" LIMIT ".(($fr>0)? "{$fr}, ": '')."{$num}"));
+
     	return "SELECT {$col}".(empty($tbl)? '': " FROM {$tbl}").(empty($flt)? '': "  WHERE {$flt}").(empty($ord)? '': " ORDER BY {$ord}").(empty($num)? '': (" LIMIT ".(($fr>0)? "{$fr}, ": '')."{$num}"));
 	}
 
@@ -284,7 +284,6 @@ class mysql_pdo {
 
 	public function selectList($col, $tbl='', $flt='', $ord='', $fr='', $num='') {
 		$sql = $this->genSelectQuery($col, $tbl, $flt, $ord, $fr, $num);
-
 		return $this->getList($sql);
 	}
 

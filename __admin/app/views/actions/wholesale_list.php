@@ -193,10 +193,13 @@ $(document).ready(function() {
 										<a href="<?=view::create_url('wholesale', 'edit', ['id'=>$data['id']])?>" title="<?=CMS::t('edit');?>">
 											<i class="fa fa-pencil-square-o" aria-hidden="true"></i>
 										</a>
+										<a href="<?=view::create_url('wholesale', 'ajax_copy')?>" data-date="<?=date('d.m.Y',strtotime($data['date']))?>" class="copy-action m15" title="<?=CMS::t('copy');?>">
+											<i class="fa fa-clone" aria-hidden="true"></i>
+										</a>
 									<?php } ?>
 
 									<?php if (CMS::hasAccessTo('wholesale/delete', 'write')) { ?>
-									<a href="#" title="<?=CMS::t('delete');?>" class="text-red" style="margin-left: 15px;" id="aDeleteItem_<?=$data['id'];?>" data-item-id="<?=$data['id'];?>">
+									<a href="#" title="<?=CMS::t('delete');?>" class="text-red m15" id="aDeleteItem_<?=$data['id'];?>" data-item-id="<?=$data['id'];?>">
 										<i class="fa fa-trash" aria-hidden="true"></i>
 									</a>
 									<script type="text/javascript">

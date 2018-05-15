@@ -15,6 +15,10 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
 	font-size: 16px;
 }
 
+.m15{
+  margin-left: 15px;
+}
+
 .small-box .icon .fa {
 	font-size: 90px;
 }
@@ -248,14 +252,14 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
 }
 
 .tmp{
-    display:none;    
+    display:none;
 }
 .group-price{
     margin-top:10px;
 }
 #ui-datepicker-div{
     z-index:333 !important;
-    
+
 }
 
 .pagination a:last-child {

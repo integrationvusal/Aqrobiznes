@@ -26,6 +26,7 @@ return [
 	'back' => 'Geriyə',
 	'cancel' => 'İmtina et',
 	'common_data' => 'Ümumi məlumat',
+	'copy' => 'Kopyala',
 	'controls' => 'İdarə edilməsi',
 	'del_suc' => 'Müvəffəqiyyətlə silindi',
 	'del_err' => 'Silmək mümkün olmadı',
@@ -306,7 +307,7 @@ return [
 	'photoday_img' => 'Günün fotosunun şəkli',
 	'photoday_list_details' => '{count} günün fotosu tapılıb',
 	'photoday_add_err_img_empty' => 'Günün fotosunun şəkili boş ola bilməz',
-	
+
 	//Agrocalendar
 	'agrocalendar' => 'Aqrotəqvim',
 	'agrocalendar_search' => 'Aqrotəqvim axtarışı',
@@ -315,8 +316,8 @@ return [
 	'agrocalendar_title' => 'Aqrotəqvimin başlığı',
 	'agrocalendar_content' => 'Aqrotəqvimin mətni',
 	'agrocalendar_list_details' => '{count} aqrotəqvim tapılıb',
-	
-	
+
+
 	//Questions
 	'questions' => 'Bizdən soruşurlar',
 	'questions_search' => 'Sual axtarışı',
@@ -324,8 +325,8 @@ return [
 	'questions_answer' => 'Sualın cavabı',
 	'questions_is_answer' => 'Cavablandırılıb?',
 	'questions_list_details' => '{count} sual tapılıb',
-	
-	
+
+
 	//WHOLESALE
 	'wholesale' => 'Bazar qiymətləri',
 	'wholesale_search' => 'Bazar qiymətlərinin axtarışı',
@@ -336,19 +337,19 @@ return [
 	'wholesale_price' => 'Qiyməti yazın',
 	'wholesale_market' => 'Bazarı seçin',
 	'wholesale_list_details' => '{count} bazar qiyməti tapılıb',
-	
+
 	//Markets
 	'markets' => 'Bazarlar',
 	'markets_search' => 'Bazar axtarışı',
 	'markets_name' => 'Bazarın adı',
 	'markets_list_details' => '{count} bazar tapılıb',
-	
+
 	//Measure
 	'measure' => 'Ölçü vahidləri',
 	'measure_search' => 'Ölçü vahidinin axtarışı',
 	'measure_name' => 'Ölçü vahidinin adı',
 	'measure_list_details' => '{count} ölçü vahidi tapılıb',
-	
+
 	//PRODUCT
 	'product' => 'Ölçü vahidləri',
 	'product_search' => 'Ölçü vahidinin axtarışı',
@@ -722,7 +723,7 @@ return [
 	'clauses_assignment' => 'Təyinat',
 
 
-    
+
 	//Clauses
 	'dayphoto_desc' => 'Günün fotosunun məzmunu',
 	'dayphoto_id_num' => 'Günün fotosunun ID nömrəsi',

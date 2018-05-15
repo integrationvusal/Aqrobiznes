@@ -41,7 +41,7 @@ class wholesale_controller extends controller {
 
 		return self::render('wholesale_list', $params);
 	}
-	
+
 	public static function action_add() {
 		self::$layout = 'common_layout';
 		view::$title = CMS::t('menu_item_wholesale_add');
@@ -55,7 +55,7 @@ class wholesale_controller extends controller {
 		$params['measure'] = measure::getList();
 		$params['product'] = product::getList(true);
 		$params['markets'] = markets::getList();
-		
+
 
 		if (isset($_POST['add'])) {
 			$params['op'] = wholesale::add();
@@ -67,7 +67,7 @@ class wholesale_controller extends controller {
 		return self::render('wholesale_add', $params);
 	}
 
-	public static function action_edit() { 
+	public static function action_edit() {
 		self::$layout = 'common_layout';
 		view::$title = CMS::t('menu_item_wholesale_edit');
 		$_GET['id'] = abs((int)$_GET['id']);
@@ -90,7 +90,7 @@ class wholesale_controller extends controller {
 
 		return self::render('wholesale_edit', $params);
 	}
-	
+
 		public static function action_delete() { // 2016-10-18
 
 		$params = [];
@@ -109,6 +109,24 @@ class wholesale_controller extends controller {
 		else	return CMS::resolve('base/404');
 	}
 
+
+	public static function action_ajax_copy(){
+		if(!utils::isAjax() || !CMS::hasAccessTo('wholesale/edit', 'write')){
+			header('HTTP/1.1 404 Not Found');
+			return self::render('404');
+		}
+
+		header('Content-type: application/json; charset=utf-8');
+
+		$response['success'] = false;
+
+		$_POST['date'] = date('Y-m-d', strtotime($_POST['date']));
+		$_POST['id'] = abs((int)$_POST['id']);
+		wholesale::ajax_copy($_POST['date'], $_POST['id']);
+
+		$response['success'] = true;
+		return json_encode($response);
+	}
 
 	public static function action_ajax_sort(){
 		if(!utils::isAjax() || !CMS::hasAccessTo('wholesale/ajax_sort', 'write')){

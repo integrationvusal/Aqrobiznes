@@ -41,13 +41,13 @@ class wholesale{
 
         $filtered_array = [];
 		self::filter_array($_POST['pricetable'], $filtered_array);
-		
+
 
 		$data['date'] = utils::safeEcho(date('Y-m-d', strtotime($_POST['date'])), true);
 		$data['measure_id'] = utils::safeEcho(abs((int)$_POST['measure']), true);
 		$data['product_id'] = utils::safeEcho(abs((int)$_POST['product']), true);
 		$data['prices'] = json_encode( $filtered_array, JSON_UNESCAPED_UNICODE );
-		
+
 		if(isset($_FILES['img']) && $_FILES['img']['error'] == 0 && $_FILES['img']['size']  > 0){
 			$ext = pathinfo($_FILES['img']['name'], PATHINFO_EXTENSION);
 			$data['img'] = utils::upload(time().'.'.$ext, $_FILES['img']['tmp_name'], '../upload/wholesale/', ['jpg', 'jpeg', 'png']);
@@ -83,21 +83,21 @@ class wholesale{
 
 	    $filtered_array = [];
 		self::filter_array($_POST['pricetable'], $filtered_array);
-		
+
 		$data['date'] = utils::safeEcho(date('Y-m-d', strtotime($_POST['date'])), true);
 		$data['measure_id'] = utils::safeEcho(abs((int)$_POST['measure']), true);
 		$data['product_id'] = utils::safeEcho(abs((int)$_POST['product']), true);
 		$data['prices'] = json_encode( $filtered_array, JSON_UNESCAPED_UNICODE );
-		
-		
+
+
 		if(isset($_FILES['img']) && $_FILES['img']['error'] == 0 && $_FILES['img']['size']  > 0){
-		    
+
 		    $_df = UPLOADS_DIR.'wholesale/'.$data['img'];
 		    if(file_exists($_df)) unlink($df);
-		        
+
 			$ext = pathinfo($_FILES['img']['name'], PATHINFO_EXTENSION);
 			$data['img'] = utils::upload(time().'.'.$ext, $_FILES['img']['tmp_name'], '../upload/wholesale/', ['jpg', 'jpeg', 'png']);
-			
+
 		}
 
 
@@ -140,8 +140,8 @@ class wholesale{
 			]);
 		}
 	}
-	
-	
+
+
 	public static function ajax_sort($items, $cal_start){
 
 		$cal_start = abs((int)$cal_start);
@@ -163,6 +163,17 @@ class wholesale{
 		}
 	}
 
+	public static function ajax_copy($date, $id){
+		$copy = CMS::$db->exec('INSERT INTO `'.self::$tbl.'`(measure_id,product_id,prices,date,ordering) SELECT measure_id,product_id,prices, :date date,  (SELECT MAX(id)+1 FROM `'.self::$tbl.'`) ordering FROM `'.self::$tbl.'` WHERE id=:id', [':date'=>$date,':id' => $id]);
+		if($copy)
+			CMS::log([
+				'subj_table' => self::$tbl,
+				'subj_id' => $id,
+				'action' => 'ajax_copy',
+				'descr' => 'wholesale copied by '.$_SESSION[CMS::$sess_hash]['ses_adm_type'].' '.ADMIN_INFO,
+			]);
+	}
+
 	public static function get($id){
 		return CMS::$db->getRow('SELECT * FROM `'.self::$tbl.'` WHERE `id`=:id', [':id'=>$id]);
 	}
@@ -171,7 +182,7 @@ class wholesale{
 	private static function lastValueField($field){
 		return CMS::$db->get("SELECT $field FROM `".self::$tbl."` ORDER BY id DESC LIMIT 1");
 	}
-	
+
 	private static function filter_array($arr, &$data){
         foreach($arr as $k=>$v){
             if(is_array($v)) self::filter_array($v, $data[$k]);

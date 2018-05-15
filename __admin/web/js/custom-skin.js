@@ -1,47 +1,47 @@
 function translit(e){
 
 	if(~$(this).attr('name').search('^name') && $('[name^="name["]:first')[0] !== this && $('[name^="name["]:first').val() != '') return;
-	
+
 	if(~$(this).attr('name').search('^title') && $('[name^="title"]:first')[0] !== this && $('[name^="title"]:first').val() != '') return;
 
-	var space = '-'; 
+	var space = '-';
 	var text = $(this).val().toLowerCase();
 	var transl = {
-	'ş':'sh', 'ğ':'gh', 'ç':'ch', 'ö': 'o', 'ı':'i', 'ə':'e', 'ü':'u', 'а': 'a', 'б': 'b', 'в': 'v', 'г': 'g', 'д': 'd', 'е': 'e', 'ё': 'e', 'ж': 'zh', 
+	'ş':'sh', 'ğ':'gh', 'ç':'ch', 'ö': 'o', 'ı':'i', 'ə':'e', 'ü':'u', 'а': 'a', 'б': 'b', 'в': 'v', 'г': 'g', 'д': 'd', 'е': 'e', 'ё': 'e', 'ж': 'zh',
 	'з': 'z', 'и': 'i', 'й': 'j', 'к': 'k', 'л': 'l', 'м': 'm', 'н': 'n',
 	'о': 'o', 'п': 'p', 'р': 'r','с': 's', 'т': 't', 'у': 'u', 'ф': 'f', 'х': 'h',
 	'ц': 'c', 'ч': 'ch', 'ш': 'sh', 'щ': 'sh','ъ': space, 'ы': 'y', 'ь': space, 'э': 'e', 'ю': 'yu', 'я': 'ya',
 	' ': space, '_': space, '`': space, '~': space, '!': space, '@': space,
-	'#': space, '$': space, '%': space, '^': space, '&': space, '*': space, 
-	'(': space, ')': space,'-': space, '\=': space, '+': space, '[': space, 
+	'#': space, '$': space, '%': space, '^': space, '&': space, '*': space,
+	'(': space, ')': space,'-': space, '\=': space, '+': space, '[': space,
 	']': space, '\\': space, '|': space, '/': space,'.': space, ',': space,
 	'{': space, '}': space, '\'': space, '"': space, ';': space, ':': space,
 	'?': space, '<': space, '>': space, '№':space
 	}
-	                
+
 	var result = '';
 	var curent_sim = '';
-	                
+
 	for(i=0; i < text.length; i++) {
 	    if(transl[text[i]] !== undefined) {
 	        if(curent_sim != transl[text[i]] || curent_sim != space){
 	             result += transl[text[i]];
 	             curent_sim = transl[text[i]];
-	        }                                                                             
+	        }
 	    }
 	    else {
 	        result += text[i];
 	        curent_sim = text[i];
-	    }                              
+	    }
 	}
 
-	result = TrimStr(result); 
+	result = TrimStr(result);
 
 	if($('.nav-item').attr('class') !== undefined && $('.nav-item .btn-info').attr('class') === undefined && $('.jstree-clicked').data('item_id') !== 0)
 		result = $('.jstree-clicked').attr('data-sef-url') + '-' + result;
 
-	$('[name="sef"]').val(result); 
-    
+	$('[name="sef"]').val(result);
+
 }
 
 function TrimStr(s) {
@@ -57,7 +57,7 @@ function popitup(url) {
 }
 
 $(document).ready(function() {
-	
+
 	if(	$('.article-select').attr('class') !== undefined){
 
 		$('.article-select').prev().change(function(){
@@ -72,15 +72,29 @@ $(document).ready(function() {
 			$('.article-select').addClass('active');
 		}
 	}
-	
+
 	var _tmp = $('.tmp').html();
-	
+
 	$('body').on('click', '.add-pricetable', function(){
 	    $(this).parents('.form-group').append(_tmp);
 	});
-	
+
 	$('body').on('click', '.del-pricetable', function(){
-	   $(this).parents('.group-price').remove(); 
+	   $(this).parents('.group-price').remove();
+	});
+
+	$('.copy-action').click(function(e){
+		e.preventDefault();
+		_v = prompt('Tarix:', $(this).data('date'));
+		if(_v){
+			$.post($(this).attr('href'), {date:_v, CSRF_token:$('[name="CSRF_token"]').val(), id:$(this).parents('tr').data('id')}, function(response){
+					if(response.success) {
+						if($('#tablesorter > tr').length < 10) location.reload();
+						else location.href = location.href.replace(/page=./, 'page='+(parseInt($('.pagination .number:last').text()) + 1));
+					}
+					else alert('Əməliyyatı icra etmək mümkün olmadı!');
+			});
+		}
 	});
 
 	$('.open-album').click(function(){
@@ -102,22 +116,22 @@ $(document).ready(function() {
 		else
 			$('.link-tabs a:last').trigger('click');
 	}
-	
+
 	$('.active [data-tab="true"]').each(function(){
 		$(this).parents('ul').next().children().removeClass('active');
 		$(this).parents('ul').next().find($(this).attr('href')).addClass('active');
 	});
-	
+
 	$('[data-tab="true"]').click(function(){
 		$(this).parents('ul').next().children().removeClass('active');
 		$(this).parents('ul').next().find($(this).attr('href')).addClass('active');
-		
+
 		$(this).parent().siblings().removeClass('active');
 		$(this).parent().addClass('active');
-		
+
 		return false;
 	});
-	
+
 
 	// customized file inputs placeholder updating on change
 	var file_api = ((window.File && window.FileReader && window.FileList && window.Blob)? true: false);
@@ -224,7 +238,7 @@ $(document).ready(function() {
 		$('#'+$(this).attr('form')).submit();
 	});
 
-	
+
 	_editInList = $('#main-content tbody tr .fa-pencil-square-o');
 	if(_editInList.length){
 		$('#main-content tbody tr').css('cursor', 'pointer');
@@ -232,6 +246,6 @@ $(document).ready(function() {
 			location.href = $('.fa-pencil-square-o',this).parent().attr('href');
 		});
 	}
-	
-	
+
+
 });
